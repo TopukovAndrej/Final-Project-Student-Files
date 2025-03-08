@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class HttpService {
-  private readonly apiUrl: string = 'API_URL';
+  private readonly apiUrl: string = 'API_URL'; // TODO: To be changed with actual API url
 
   constructor(private readonly httpClient: HttpClient) {}
 }
