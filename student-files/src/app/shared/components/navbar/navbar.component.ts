@@ -7,4 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  public contentMessage: string = '';
+
+  constructor() {}
+}
