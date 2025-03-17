@@ -1,14 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { UserRolePipe } from '../../pipes/user-role/user-role.pipe';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, CommonModule, UserRolePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   public contentMessage: string = '';
+  public signedInUserRole: string = '';
 
   constructor() {}
+
+  public onSignInClicked(): void {}
 }
