@@ -10,7 +10,6 @@ import { UserRolePipe } from '../../pipes/user-role/user-role.pipe';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  public contentMessage: string = '';
   public signedInUserRole: string = '';
 
   constructor() {}
