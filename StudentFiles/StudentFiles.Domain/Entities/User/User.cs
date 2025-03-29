@@ -10,7 +10,7 @@
 
         public UserRole Role { get; private set; }
 
-        public User(int id, Guid uid, bool isDeleted, string username, string hashedPassword, UserRole role)
+        private User(int id, Guid uid, bool isDeleted, string username, string hashedPassword, UserRole role) 
             : base(id: id, uid: uid, isDeleted: isDeleted)
         {
             Username = username;

@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="navbar-intro">
+    <div class="navbar-logo">
+      <img src="images/student.jpg" alt="studentFilesLogo" />
+    </div>
+    <div class="navbar-name">Student Files</div>
+  </div>
+  <div class="navbar-content">
+    {{signedInUserRole === '' ? 'Welcome!' : `Welcome, ${signedInUserRole | userRole}!`}}
+  </div>
+  <ul class="navbar-actions">
+    <li *ngIf="signedInUserRole === ''">
+      <button type="button" mat-flat-button (click)="onSignInClicked()">
+        Sign In
+      </button>
+    </li>
+  </ul>
+</nav>
