@@ -1,42 +1,39 @@
 ﻿namespace StudentFiles.Contracts.Models.Result
 {
+    using StudentFiles.Contracts.Common;
+
     public class Result
     {
         public bool IsSuccess { get; }
 
         public bool IsFailure => !IsSuccess;
 
-        public string? ErrorMessage { get; }
+        public Error? Error { get; }
 
         public ResultType Type { get; }
 
-        protected Result(bool isSuccess, string? errorMessage, ResultType type)
+        protected Result(bool isSuccess, Error? error, ResultType type)
         {
             IsSuccess = isSuccess;
-            ErrorMessage = errorMessage;
+            Error = error;
             Type = type;
         }
 
-        public static Result Success() => new(isSuccess: true, errorMessage: null, type: ResultType.Success);
+        public static Result Success() => new(isSuccess: true, error: null, type: ResultType.Success);
 
-        public static Result Failed(string? errorMessage, ResultType resultType) => new(isSuccess: false,
-                                                                                        errorMessage: errorMessage,
-                                                                                        type: resultType);
+        public static Result Failed(Error? error, ResultType resultType) => new(isSuccess: false, error: error, type: resultType);
     }
 
     public class Result<T> : Result
     {
         public T? Value { get; }
 
-        private Result(T value) : base(isSuccess: true, errorMessage: null, type: ResultType.Success) => Value = value;
+        private Result(T value) : base(isSuccess: true, error: null, type: ResultType.Success) => Value = value;
 
-        private Result(string? errorMessage, ResultType resultType) : base(isSuccess: false,
-                                                                           errorMessage: errorMessage,
-                                                                           type: resultType) => Value = default;
+        private Result(Error? error, ResultType resultType) : base(isSuccess: false, error: error, type: resultType) => Value = default;
 
         public static Result<T> Success(T value) => new(value: value);
 
-        public static new Result<T> Failed(string? errorMessage, ResultType resultType) => new(errorMessage: errorMessage,
-                                                                                               resultType: resultType);
+        public static new Result<T> Failed(Error? error, ResultType resultType) => new(error: error, resultType: resultType);
     }
 }
