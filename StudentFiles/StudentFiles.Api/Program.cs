@@ -1,13 +1,24 @@
 namespace StudentFiles.Api
 {
+    using Microsoft.EntityFrameworkCore;
     using StudentFiles.Application;
     using StudentFiles.Contracts;
+    using StudentFiles.Infrastructure.Database.Context;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            string? dbConnectionString = builder.Configuration.GetConnectionString(name: "DefaultConnection");
+
+            builder.Services.AddDbContext<StudentFilesReadonlyDbContext>(optionsAction: options => options.UseSqlServer(connectionString: dbConnectionString)
+                                                                                                          .UseQueryTrackingBehavior(queryTrackingBehavior: QueryTrackingBehavior.NoTracking));
+            builder.Services.AddScoped<IStudentFilesReadonlyDbContext, StudentFilesReadonlyDbContext>();
+
+            builder.Services.AddDbContext<StudentFilesDbContext>(optionsAction: options => options.UseSqlServer(connectionString: dbConnectionString));
+            builder.Services.AddScoped<IStudentFilesDbContext, StudentFilesDbContext>();
 
             builder.Services.AddMediatR(configuration: cfg =>
             {

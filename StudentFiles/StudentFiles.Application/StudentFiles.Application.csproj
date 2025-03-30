@@ -10,4 +10,9 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StudentFiles.Contracts\StudentFiles.Contracts.csproj" />
+    <ProjectReference Include="..\StudentFiles.Infrastructure\StudentFiles.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
