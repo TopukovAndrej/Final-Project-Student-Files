@@ -1,22 +1,37 @@
-
 namespace StudentFiles.Api
 {
+    using Microsoft.EntityFrameworkCore;
+    using StudentFiles.Application;
+    using StudentFiles.Contracts;
+    using StudentFiles.Infrastructure.Database.Context;
+
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            string? dbConnectionString = builder.Configuration.GetConnectionString(name: "DefaultConnection");
+
+            builder.Services.AddDbContext<StudentFilesReadonlyDbContext>(optionsAction: options => options.UseSqlServer(connectionString: dbConnectionString)
+                                                                                                          .UseQueryTrackingBehavior(queryTrackingBehavior: QueryTrackingBehavior.NoTracking));
+            builder.Services.AddScoped<IStudentFilesReadonlyDbContext, StudentFilesReadonlyDbContext>();
+
+            builder.Services.AddDbContext<StudentFilesDbContext>(optionsAction: options => options.UseSqlServer(connectionString: dbConnectionString));
+            builder.Services.AddScoped<IStudentFilesDbContext, StudentFilesDbContext>();
+
+            builder.Services.AddMediatR(configuration: cfg =>
+            {
+                cfg.RegisterGenericHandlers = true;
+                cfg.RegisterServicesFromAssemblies(typeof(ContractsAssemblyMarker).Assembly, typeof(ApplicationAssemblyMarker).Assembly);
+            });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
