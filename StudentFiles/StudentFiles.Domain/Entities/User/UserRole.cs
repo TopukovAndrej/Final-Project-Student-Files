@@ -18,7 +18,7 @@
 
             if (role is null)
             {
-                return Result<UserRole>.Failed(errorMessage: ErrorCodes.UserRoleNotValid, resultType: ResultType.Invalid);
+                return Result<UserRole>.Failed(error: new Error(Code: ErrorCodes.UserRoleNotValid, Message: ErrorMessage.UserRoleNotValid), resultType: ResultType.Invalid);
             }
 
             return Result<UserRole>.Success(value: role);
