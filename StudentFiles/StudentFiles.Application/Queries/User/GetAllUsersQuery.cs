@@ -24,7 +24,8 @@
 
             if (users.Count == 0)
             {
-                return Result<IReadOnlyList<UserDto>>.Failed(errorMessage: ErrorCodes.UsersNotFound, resultType: ResultType.NotFound);
+                return Result<IReadOnlyList<UserDto>>.Failed(error: new Error(Code: ErrorCodes.UsersNotFound, Message: ErrorCodes.UsersNotFound),
+                                                             resultType: ResultType.NotFound);
             }
 
             return Result<IReadOnlyList<UserDto>>.Success(value: users);
