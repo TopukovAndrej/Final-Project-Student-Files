@@ -1,0 +1,58 @@
+<div class="sign-in-container">
+  <div class="header">
+    <h4>Sign In</h4>
+  </div>
+  <form class="sign-in-form" [formGroup]="signInForm">
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          this.signInForm.controls['username'].touched &&
+          this.signInForm.controls['username'].invalid
+        "
+        >Please enter a valid username (email)</mat-error
+      >
+      <div class="username">
+        <label for="username">Username:</label>
+        <input
+          type="email"
+          formControlName="username"
+          placeholder="Enter your email"
+        />
+      </div>
+    </div>
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          (this.signInForm.controls['password'].hasError('required') ||
+            this.signInForm.controls['password'].hasError('invalid')) &&
+          this.signInForm.controls['password'].invalid &&
+          this.signInForm.controls['password'].touched
+        "
+        >{{
+          this.signInForm.controls["password"].getError("errorMessage")
+        }}</mat-error
+      >
+      <div class="password">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button" type="button" (click)="onCancelClicked()">
+        Cancel
+      </button>
+      <button
+        class="button"
+        type="button"
+        [disabled]="this.signInForm.invalid"
+        (click)="onSignInClicked()"
+      >
+        Sign In
+      </button>
+    </div>
+  </form>
+</div>

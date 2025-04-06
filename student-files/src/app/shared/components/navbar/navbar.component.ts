@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { UserRolePipe } from '../../pipes/user-role/user-role.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,9 @@ import { UserRolePipe } from '../../pipes/user-role/user-role.pipe';
 export class NavbarComponent {
   public signedInUserRole: string = '';
 
-  constructor() {}
+  constructor(private readonly router: Router) {}
 
-  public onSignInClicked(): void {}
+  public onSignInClicked(): void {
+    this.router.navigate(['/sign-in']);
+  }
 }
