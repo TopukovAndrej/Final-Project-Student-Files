@@ -50,7 +50,7 @@ export class SignInComponent implements OnInit {
         '',
         [
           Validators.required,
-          StudentFilesFormValidators.passwordFormControlValidator(),
+          StudentFilesFormValidators.signInPasswordFormControlValidator(),
         ],
       ],
     });
