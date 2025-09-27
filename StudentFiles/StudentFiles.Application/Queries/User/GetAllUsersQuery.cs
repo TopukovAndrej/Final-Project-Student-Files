@@ -16,7 +16,7 @@
 
     public class GetAllUsersQueryHandler(IStudentFilesReadonlyDbContext dbContext) : IRequestHandler<GetAllUsersQuery, Result<IReadOnlyList<UserDto>>>
     {
-        public async Task<Result<IReadOnlyList<UserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IReadOnlyList<UserDto>>> Handle(GetAllUsersQuery query, CancellationToken cancellationToken)
         {
             List<UserDto> users = await dbContext.Users.Where(predicate: x => !x.IsDeleted)
                                                        .Select(selector: x => new UserDto() { Username = x.Username, Role = x.Role })

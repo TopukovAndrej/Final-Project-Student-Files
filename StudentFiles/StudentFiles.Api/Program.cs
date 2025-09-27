@@ -1,6 +1,8 @@
 namespace StudentFiles.Api
 {
     using Microsoft.EntityFrameworkCore;
+    using StudentFiles.Api.Configuration;
+    using StudentFiles.Api.Services;
     using StudentFiles.Application;
     using StudentFiles.Contracts;
     using StudentFiles.Infrastructure.Database.Context;
@@ -19,6 +21,10 @@ namespace StudentFiles.Api
 
             builder.Services.AddDbContext<StudentFilesDbContext>(optionsAction: options => options.UseSqlServer(connectionString: dbConnectionString));
             builder.Services.AddScoped<IStudentFilesDbContext, StudentFilesDbContext>();
+
+            builder.Services.Configure<JwtSettings>(config: builder.Configuration.GetSection(key: "JwtSettings"));
+
+            builder.Services.AddScoped<IJwtService, JwtService>();
 
             builder.Services.AddMediatR(configuration: cfg =>
             {
