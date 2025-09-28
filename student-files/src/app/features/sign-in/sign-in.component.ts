@@ -43,10 +43,6 @@ export class SignInComponent extends BaseComponent implements OnInit {
   }
 
   public onSignInClicked(): void {
-    console.log('Sign In clicked');
-
-    const signInFormValues = this.signInForm.value;
-
     const request: IUserLoginRequest = {
       username: this.signInForm.controls['username'].value,
       password: this.signInForm.controls['password'].value,

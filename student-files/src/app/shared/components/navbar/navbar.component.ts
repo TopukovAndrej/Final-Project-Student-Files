@@ -36,7 +36,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
       .pipe(this.untilDestroyed())
       .subscribe((user: IUserDetailsFromToken | null) => {
         if (user) {
-          this.signedInUserRole = user.role;
+          this.signedInUserRole = user.userRole;
         } else {
           this.signedInUserRole = '';
         }

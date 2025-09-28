@@ -47,9 +47,9 @@ export class AuthService {
 
           return of(false);
         }),
-        catchError(() => {
+        catchError((response) => {
           this.toasterService.show(
-            ToasterMessages.COMMON_ERROR,
+            response.error.error.message ?? ToasterMessages.COMMON_ERROR,
             ToasterType.Error
           );
 
@@ -106,7 +106,7 @@ export class AuthService {
       return {
         userUid: decodedData.sub,
         username: decodedData.email,
-        role: decodedData.role,
+        userRole: decodedData.role,
       };
     } catch (error) {
       console.error('Cannot decode token, error: ', error);
