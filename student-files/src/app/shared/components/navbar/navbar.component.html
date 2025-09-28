@@ -14,5 +14,19 @@
         Sign In
       </button>
     </li>
+    <li *ngIf="signedInUserRole !== ''">
+      <button type="button" mat-flat-button (click)="onSignOutClicked()">
+        Sign Out
+      </button>
+    </li>
+    <li *ngIf="signedInUserRole === 'ADMIN'">
+      <a mat-button routerLink="/admin/panel">Admin Panel</a>
+    </li>
+    <li *ngIf="signedInUserRole === 'PROFESSOR'">
+      <a mat-button routerLink="/professor/dashboard">Professor Dashboard</a>
+    </li>
+    <li *ngIf="signedInUserRole === 'STUDENT'">
+      <a mat-button routerLink="/student/dashboard">Student Dashboard</a>
+    </li>
   </ul>
 </nav>

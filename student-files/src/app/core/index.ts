@@ -1,3 +1,3 @@
 export * from './core.config';
-export * from './services/http/http.service';
-export * from './services/auth/auth.service';
+export * from './services/index';
+export * from './contracts/index';
