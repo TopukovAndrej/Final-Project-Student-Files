@@ -30,7 +30,7 @@ export class AuthService {
     this.currentUserSubject.next(this.fetchUserDetailsFromToken());
   }
 
-  authenticateUser(request: IUserLoginRequest): Observable<boolean> {
+  public authenticateUser(request: IUserLoginRequest): Observable<boolean> {
     return this.httpService
       .post<IResult<IUserLoginResponse>>('/auth/login', request)
       .pipe(
@@ -58,11 +58,11 @@ export class AuthService {
       );
   }
 
-  isSessionExpired(tokenExpirationClaim: number): boolean {
+  public isSessionExpired(tokenExpirationClaim: number): boolean {
     return Date.now() >= tokenExpirationClaim * 1000;
   }
 
-  signOut(): void {
+  public signOut(): void {
     localStorage.removeItem(this.tokenKey);
 
     this.clearAuthState();
@@ -72,8 +72,12 @@ export class AuthService {
     this.toasterService.show('Signed out successfully', 'success');
   }
 
-  getToken(): string | null {
+  public getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
+  }
+
+  public getCurrentUser(): IUserDetailsFromToken | null {
+    return this.currentUserSubject.getValue();
   }
 
   private setJwtToken(token: string): void {
