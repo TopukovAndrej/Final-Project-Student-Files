@@ -2,8 +2,10 @@
 {
     public class UserDto
     {
-        public string Username { get; set; }
+        public Guid Uid { get; init; }
 
-        public string Role { get; set; }
+        public string Username { get; init; }
+
+        public string Role { get; init; }
     }
 }
