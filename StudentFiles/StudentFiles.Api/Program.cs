@@ -32,11 +32,23 @@ namespace StudentFiles.Api
                 cfg.RegisterServicesFromAssemblies(typeof(ContractsAssemblyMarker).Assembly, typeof(ApplicationAssemblyMarker).Assembly);
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "StudentFilesClient", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseCors("StudentFilesClient");
 
             if (app.Environment.IsDevelopment())
             {
@@ -45,7 +57,6 @@ namespace StudentFiles.Api
             }
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

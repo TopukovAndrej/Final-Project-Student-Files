@@ -46,7 +46,7 @@
                 return StatusCode(statusCode: StatusCodes.Status500InternalServerError, value: "Failed to authenticate user. Please contact support. Code: 500");
             }
 
-            return Ok(value: new { token = jsonWebToken });
+            return Ok(value: Result<UserLoginResponseDto>.Success(value: new UserLoginResponseDto { Token = jsonWebToken }));
         }
     }
 }

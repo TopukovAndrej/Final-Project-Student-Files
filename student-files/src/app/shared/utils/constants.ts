@@ -7,4 +7,10 @@ export class StudentFilesConstants {
     this.PasswordMinNumberOfLetters +
     this.PasswordMinNumberOfDigits +
     this.PasswordMinNumberOfSpecialCharacters;
+
+  // Messages
+  public static readonly PleaseLoginMessage =
+    'Please log in to use the application.';
+  public static readonly WelcomeAdminMessage =
+    'Welcome, Admin! Have a productive day!';
 }
