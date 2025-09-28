@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BaseComponent, StudentFilesConstants, UserRole } from '../../shared';
+import { AuthService, IUserDetailsFromToken } from '../../core';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +8,34 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-  public contentMessage: string = 'Please log in to use the application.';
+export class HomeComponent extends BaseComponent implements OnInit {
+  public contentMessage: string = StudentFilesConstants.PleaseLoginMessage;
 
-  constructor() {}
+  constructor(private readonly authService: AuthService) {
+    super();
+  }
+
+  public ngOnInit(): void {
+    this.authService.currentUser$
+      .pipe(this.untilDestroyed())
+      .subscribe((user: IUserDetailsFromToken | null) => {
+        if (user) {
+          if (user.userRole === UserRole.Admin) {
+            this.contentMessage = StudentFilesConstants.WelcomeAdminMessage;
+          } else {
+            const userName = user.username.split('.')[0];
+
+            const name = userName.charAt(0).toUpperCase() + userName.slice(1);
+
+            if (user.userRole === UserRole.Professor) {
+              this.contentMessage = `Welcome, professor ${name}! Have a productive day!`;
+            } else {
+              this.contentMessage = `Welcome, ${name}! Have a good day!`;
+            }
+          }
+        } else {
+          this.contentMessage = StudentFilesConstants.PleaseLoginMessage;
+        }
+      });
+  }
 }

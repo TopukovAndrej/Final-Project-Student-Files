@@ -9,8 +9,9 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { RouterModule } from '@angular/router';
-import { StudentFilesFormValidators } from '../../shared';
+import { Router, RouterModule } from '@angular/router';
+import { BaseComponent, StudentFilesFormValidators } from '../../shared';
+import { AuthService, IUserLoginRequest } from '../../core';
 
 @Component({
   selector: 'app-sign-in',
@@ -25,10 +26,16 @@ import { StudentFilesFormValidators } from '../../shared';
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent extends BaseComponent implements OnInit {
   public signInForm!: FormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder) {}
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {
+    super();
+  }
 
   public onCancelClicked(): void {
     this.signInForm.controls['username'].reset();
@@ -36,7 +43,24 @@ export class SignInComponent implements OnInit {
   }
 
   public onSignInClicked(): void {
-    console.log('Sign In clicked');
+    const request: IUserLoginRequest = {
+      username: this.signInForm.controls['username'].value,
+      password: this.signInForm.controls['password'].value,
+    };
+
+    this.authService
+      .authenticateUser(request)
+      .pipe(this.untilDestroyed())
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            this.router.navigate(['/home']);
+          }
+        },
+        error: (error) => {
+          console.error('Unexpected error: ', error);
+        },
+      });
   }
 
   public ngOnInit(): void {
