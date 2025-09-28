@@ -23,7 +23,7 @@
     {
         public async Task<Result<int>> Handle(AuthenticateUserQuery query, CancellationToken cancellationToken)
         {
-            UserAuthDto? userAuthDto = await dbContext.Users.Where(predicate: x => !x.IsDeleted && x.Username == query.LoginRequest.UserName)
+            UserAuthDto? userAuthDto = await dbContext.Users.Where(predicate: x => !x.IsDeleted && x.Username == query.LoginRequest.Username)
                                                             .Select(selector: x => new UserAuthDto() { UserId = x.Id, Username = x.Username, HashedPassword = x.HashedPassword })
                                                             .SingleOrDefaultAsync(cancellationToken);
 
