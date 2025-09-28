@@ -2,7 +2,7 @@
 {
     public class UserLoginRequest
     {
-        public string UserName { get; }
+        public string Username { get; }
 
         public string Password { get; }
     }
