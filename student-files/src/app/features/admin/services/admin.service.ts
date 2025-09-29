@@ -9,7 +9,7 @@ import { IResult, IUserDto } from '../../../shared';
 export class AdminService {
   constructor(private readonly httpService: HttpService) {}
 
-  public getAllUsers(): Observable<IResult<IUserDto[]>> {
-    return this.httpService.get<IResult<IUserDto[]>>('/users/all');
+  public getAllNonAdminUsers(): Observable<IResult<IUserDto[]>> {
+    return this.httpService.get<IResult<IUserDto[]>>('/users/all-non-admin');
   }
 }

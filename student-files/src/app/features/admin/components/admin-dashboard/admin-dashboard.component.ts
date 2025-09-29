@@ -9,13 +9,25 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BaseComponent, IResult, IUserDto, StudentFilesFormValidators, ToasterMessages, UserRolePipe } from '../../../../shared';
+import {
+  BaseComponent,
+  IResult,
+  IUserDto,
+  StudentFilesFormValidators,
+  ToasterMessages,
+  UserRolePipe,
+} from '../../../../shared';
 import { AdminService } from '../../services/admin.service';
 import { ToasterService, ToasterType } from '../../../../core';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [CommonModule, MatFormFieldModule, ReactiveFormsModule, UserRolePipe],
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    UserRolePipe,
+  ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
@@ -35,7 +47,7 @@ export class AdminDashboardComponent extends BaseComponent implements OnInit {
     this.initForm();
 
     this.adminService
-      .getAllUsers()
+      .getAllNonAdminUsers()
       .pipe(this.untilDestroyed())
       .subscribe({
         next: (result: IResult<IUserDto[]>) => {

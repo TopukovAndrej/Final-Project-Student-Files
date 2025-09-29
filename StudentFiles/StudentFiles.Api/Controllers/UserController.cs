@@ -12,10 +12,10 @@
     public class UserController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
-        [Route("all")]
-        public async Task<IActionResult> GetAllUsersAsync()
+        [Route("all-non-admin")]
+        public async Task<IActionResult> GetAllNonAdminUsersAsync()
         {
-            Result<IReadOnlyList<UserDto>> result = await mediator.Send(request: new GetAllUsersQuery());
+            Result<IReadOnlyList<UserDto>> result = await mediator.Send(request: new GetAllNonAdminUsersQuery());
 
             return StatusCode(statusCode: ResultTypeMapper.MapToHttpStatusCode(resultType: result.Type), value: result);
         }
