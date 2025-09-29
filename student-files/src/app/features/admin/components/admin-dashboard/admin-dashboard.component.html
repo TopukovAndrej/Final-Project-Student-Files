@@ -1,0 +1,92 @@
+<div class="admin-dashboard-container">
+  <div class="header">
+    <h4>Create, Delete or View system users</h4>
+  </div>
+  <form class="user-management-form" [formGroup]="userManagementForm">
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          this.userManagementForm.controls['userRole'].touched &&
+          this.userManagementForm.controls['userRole'].invalid
+        "
+        >Please select an user role</mat-error
+      >
+      <div class="userRole">
+        <label for="userRole">Select user role:</label>
+        <select id="userRole" formControlName="userRole">
+          <option value="" disabled selected>--Select a role--</option>
+          <option value="STUDENT">Student</option>
+          <option value="PROFESSOR">Professor</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          this.userManagementForm.controls['username'].touched &&
+          this.userManagementForm.controls['username'].invalid
+        "
+        >Please enter a valid username (email)</mat-error
+      >
+      <div class="username">
+        <label for="username">Username:</label>
+        <input
+          type="email"
+          formControlName="username"
+          placeholder="Enter your email"
+        />
+      </div>
+    </div>
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          (this.userManagementForm.controls['password'].hasError('required') ||
+            this.userManagementForm.controls['password'].hasError('invalid')) &&
+          this.userManagementForm.controls['password'].invalid &&
+          this.userManagementForm.controls['password'].touched
+        "
+        >{{
+          this.userManagementForm.controls["password"].getError("errorMessage")
+        }}</mat-error
+      >
+      <div class="password">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button" type="button">Cancel</button>
+      <button
+        class="button"
+        type="submit"
+        [disabled]="this.userManagementForm.invalid"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+  <div class="user-list">
+    <h3>Existing users</h3>
+    <h4>Total users: {{ users.length }}</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let user of users">
+        <td>{{ user.username }}</td>
+        <td>{{ user.role | userRole }}</td>
+        <td>
+          <button class="button" type="button">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

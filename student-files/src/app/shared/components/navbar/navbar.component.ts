@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { UserRolePipe } from '../../pipes/user-role/user-role.pipe';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService, IUserDetailsFromToken } from '../../../core';
 import { BaseComponent } from '../base/base.component';
+import { UserRole } from '../../contracts';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatButtonModule, CommonModule, UserRolePipe],
+  imports: [MatButtonModule, CommonModule, UserRolePipe, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -41,5 +42,11 @@ export class NavbarComponent extends BaseComponent implements OnInit {
           this.signedInUserRole = '';
         }
       });
+  }
+
+  public onDashboardClicked(role: string) {
+    if (role === UserRole.Admin) {
+      this.router.navigate(['/admin-dashboard'])
+    }
   }
 }

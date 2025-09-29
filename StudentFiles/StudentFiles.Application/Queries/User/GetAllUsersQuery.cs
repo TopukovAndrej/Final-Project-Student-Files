@@ -5,21 +5,22 @@
     using StudentFiles.Contracts.Common;
     using StudentFiles.Contracts.Dtos.User;
     using StudentFiles.Contracts.Models.Result;
+    using StudentFiles.Domain.Entities.User;
     using StudentFiles.Infrastructure.Database.Context;
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class GetAllUsersQuery : IRequest<Result<IReadOnlyList<UserDto>>>
+    public class GetAllNonAdminUsersQuery : IRequest<Result<IReadOnlyList<UserDto>>>
     {
-        public GetAllUsersQuery() { }
+        public GetAllNonAdminUsersQuery() { }
     }
 
-    public class GetAllUsersQueryHandler(IStudentFilesReadonlyDbContext dbContext) : IRequestHandler<GetAllUsersQuery, Result<IReadOnlyList<UserDto>>>
+    public class GetAllNonAdminUsersQueryHandler(IStudentFilesReadonlyDbContext dbContext) : IRequestHandler<GetAllNonAdminUsersQuery, Result<IReadOnlyList<UserDto>>>
     {
-        public async Task<Result<IReadOnlyList<UserDto>>> Handle(GetAllUsersQuery query, CancellationToken cancellationToken)
+        public async Task<Result<IReadOnlyList<UserDto>>> Handle(GetAllNonAdminUsersQuery query, CancellationToken cancellationToken)
         {
-            List<UserDto> users = await dbContext.Users.Where(predicate: x => !x.IsDeleted)
-                                                       .Select(selector: x => new UserDto() { Username = x.Username, Role = x.Role })
+            List<UserDto> users = await dbContext.Users.Where(predicate: x => !x.IsDeleted && x.Role != UserRole.Admin.Code)
+                                                       .Select(selector: x => new UserDto() { Uid = x.Uid, Username = x.Username, Role = x.Role })
                                                        .ToListAsync(cancellationToken: cancellationToken);
 
             if (users.Count == 0)
