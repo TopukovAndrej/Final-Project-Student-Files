@@ -5,7 +5,6 @@
     using StudentFiles.Contracts.Common;
     using StudentFiles.Contracts.Dtos.User;
     using StudentFiles.Contracts.Models.Result;
-    using StudentFiles.Domain.Entities.User;
     using StudentFiles.Infrastructure.Database.Context;
     using System.Threading;
     using System.Threading.Tasks;
@@ -19,7 +18,7 @@
     {
         public async Task<Result<IReadOnlyList<UserDto>>> Handle(GetAllNonAdminUsersQuery query, CancellationToken cancellationToken)
         {
-            List<UserDto> users = await dbContext.Users.Where(predicate: x => !x.IsDeleted && x.Role != UserRole.Admin.Code)
+            List<UserDto> users = await dbContext.Users.Where(predicate: x => !x.IsDeleted && x.Role != Domain.Entities.User.UserRole.Admin.Code)
                                                        .Select(selector: x => new UserDto() { Uid = x.Uid, Username = x.Username, Role = x.Role })
                                                        .ToListAsync(cancellationToken: cancellationToken);
 

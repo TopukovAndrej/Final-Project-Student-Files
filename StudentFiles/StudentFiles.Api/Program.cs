@@ -5,6 +5,7 @@ namespace StudentFiles.Api
     using StudentFiles.Api.Services;
     using StudentFiles.Application;
     using StudentFiles.Contracts;
+    using StudentFiles.Infrastructure.Data.Repositories.User;
     using StudentFiles.Infrastructure.Database.Context;
 
     public class Program
@@ -31,6 +32,8 @@ namespace StudentFiles.Api
                 cfg.RegisterGenericHandlers = true;
                 cfg.RegisterServicesFromAssemblies(typeof(ContractsAssemblyMarker).Assembly, typeof(ApplicationAssemblyMarker).Assembly);
             });
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddCors(options =>
             {

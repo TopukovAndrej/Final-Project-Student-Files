@@ -13,4 +13,6 @@ export class StudentFilesConstants {
     'Please log in to use the application.';
   public static readonly WelcomeAdminMessage =
     'Welcome, Admin! Have a productive day!';
+  public static readonly DeleteConfirmationMessage =
+    'Are you sure you want to delete the selected user?';
 }

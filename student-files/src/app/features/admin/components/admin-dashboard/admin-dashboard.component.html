@@ -84,7 +84,13 @@
         <td>{{ user.username }}</td>
         <td>{{ user.role | userRole }}</td>
         <td>
-          <button class="button" type="button">Delete</button>
+          <button
+            class="button"
+            type="button"
+            (click)="onDeleteClicked(user.uid)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </table>

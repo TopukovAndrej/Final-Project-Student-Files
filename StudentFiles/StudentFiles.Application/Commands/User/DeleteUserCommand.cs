@@ -2,17 +2,16 @@
 {
     using MediatR;
     using StudentFiles.Contracts.Models.Result;
-    using StudentFiles.Contracts.Requests.User;
     using StudentFiles.Domain.Entities.User;
     using StudentFiles.Infrastructure.Data.Repositories.User;
 
     public class DeleteUserCommand : IRequest<Result>
     {
-        public DeleteUserRequest Request { get; }
+        public Guid UserUid { get; set; }
 
-        public DeleteUserCommand(DeleteUserRequest request)
+        public DeleteUserCommand(Guid userUid)
         {
-            Request = request;
+            UserUid = userUid;
         }
     }
 
@@ -27,7 +26,7 @@
 
         public async Task<Result> Handle(DeleteUserCommand command, CancellationToken cancellationToken = default)
         {
-            Result<User> userResult = await _userRepository.GetUserByUidAsync(userUid: command.Request.UserUid);
+            Result<User> userResult = await _userRepository.GetUserByUidAsync(userUid: command.UserUid);
 
             if (userResult.IsFailure)
             {

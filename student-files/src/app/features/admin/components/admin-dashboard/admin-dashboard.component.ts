@@ -11,8 +11,10 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   BaseComponent,
+  IBaseResult,
   IResult,
   IUserDto,
+  StudentFilesConstants,
   StudentFilesFormValidators,
   ToasterMessages,
   UserRolePipe,
@@ -57,11 +59,33 @@ export class AdminDashboardComponent extends BaseComponent implements OnInit {
         },
         error: (response) => {
           this.toasterService.show(
-            response.error.error.message ?? ToasterMessages.COMMON_ERROR,
+            response.error ?? ToasterMessages.COMMON_ERROR,
             ToasterType.Error
           );
         },
       });
+  }
+
+  public onDeleteClicked(userUid: string): void {
+    if (confirm(StudentFilesConstants.DeleteConfirmationMessage)) {
+      this.adminService
+        .deleteUser(userUid)
+        .pipe(this.untilDestroyed())
+        .subscribe((result: IBaseResult) => {
+          if (result.isSuccess) {
+            this.users = this.users.filter((x) => x.uid !== userUid);
+            this.toasterService.show(
+              ToasterMessages.ADMIN_DELETE_USER_SUCCESSFUL,
+              ToasterType.Success
+            );
+          } else {
+            this.toasterService.show(
+              ToasterMessages.ADMIN_DELETE_USER_FAILED,
+              ToasterType.Error
+            );
+          }
+        });
+    }
   }
 
   private initForm(): void {
