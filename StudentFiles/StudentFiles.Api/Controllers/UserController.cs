@@ -1,10 +1,12 @@
 ﻿namespace StudentFiles.Api.Controllers
 {
     using MediatR;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using StudentFiles.Api.Common;
     using StudentFiles.Application.Commands.User;
     using StudentFiles.Application.Queries.User;
+    using StudentFiles.Contracts.Common;
     using StudentFiles.Contracts.Dtos.User;
     using StudentFiles.Contracts.Models.Result;
     using StudentFiles.Contracts.Requests.User;
@@ -14,7 +16,7 @@
     public class UserController(IMediator mediator) : ControllerBase
     {
         [HttpGet]
-        //[Authorize(Roles = UserRole.Admin)] - TO BE FIXED IN OTHER PR
+        [Authorize(Roles = UserRole.Admin)]
         [Route("all-non-admin")]
         public async Task<IActionResult> GetAllNonAdminUsersAsync()
         {
@@ -24,7 +26,7 @@
         }
 
         [HttpDelete]
-        //[Authorize(Roles = UserRole.Admin)] - TO BE FIXED IN OTHER PR
+        [Authorize(Roles = UserRole.Admin)]
         [Route("delete-user/{userUid:guid}")]
         public async Task<IActionResult> DeleteUserAsync([FromRoute] Guid userUid)
         {
@@ -34,7 +36,7 @@
         }
 
         [HttpPost]
-        //[Authorize(Roles = UserRole.Admin)] - TO BE FIXED IN OTHER PR
+        [Authorize(Roles = UserRole.Admin)]
         [Route("create-user")]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
         {
@@ -44,7 +46,7 @@
         }
 
         [HttpGet]
-        //[Authorize(Roles = UserRole.Admin)] - TO BE FIXED IN OTHER PR
+        [Authorize(Roles = UserRole.Admin)]
         [Route("get-user/{userUid:guid}")]
         public async Task<IActionResult> GetUserByUidAsync([FromRoute] Guid userUid)
         {
