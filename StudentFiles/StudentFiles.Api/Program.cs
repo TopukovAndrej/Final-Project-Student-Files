@@ -1,12 +1,15 @@
 namespace StudentFiles.Api
 {
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.IdentityModel.Tokens;
     using StudentFiles.Api.Configuration;
     using StudentFiles.Api.Services;
     using StudentFiles.Application;
     using StudentFiles.Contracts;
     using StudentFiles.Infrastructure.Data.Repositories.User;
     using StudentFiles.Infrastructure.Database.Context;
+    using System.Text;
 
     public class Program
     {
@@ -45,6 +48,23 @@ namespace StudentFiles.Api
                 });
             });
 
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options =>
+                            {
+                                options.TokenValidationParameters = new TokenValidationParameters
+                                {
+                                    ValidateIssuer = true,
+                                    ValidateAudience = true,
+                                    ValidateLifetime = true,
+                                    ValidateIssuerSigningKey = true,
+                                    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                                    ValidAudience = builder.Configuration["JwtSettings:Audience"],
+                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+                                };
+                            });
+
+            builder.Services.AddAuthorization();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -59,6 +79,7 @@ namespace StudentFiles.Api
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
