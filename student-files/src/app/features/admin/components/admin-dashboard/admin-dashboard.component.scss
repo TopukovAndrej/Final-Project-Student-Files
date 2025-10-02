@@ -1,0 +1,115 @@
+@mixin flex-column-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-dashboard-container {
+  @include flex-column-centered();
+  min-height: 80vh;
+  justify-content: flex-start;
+  padding: 40px 20px;
+  gap: 40px;
+}
+
+.header {
+  @include flex-column-centered();
+  gap: 25px;
+}
+
+.user-management-form {
+  @include flex-column-centered();
+  gap: 25px;
+  width: 300px;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.userRole, .username, .password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+label {
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+mat-error {
+  display: block;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 5px;
+  align-self: flex-start;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.button {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border: none;
+  box-shadow: 0 2px 4px gray;
+  transition: background-color 0.2s;
+  width: 100px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.user-list {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 40px;
+}
+
+.user-list h3, h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-list td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.user-list button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.user-list button:hover {
+  background-color: #d32f2f;
+}
