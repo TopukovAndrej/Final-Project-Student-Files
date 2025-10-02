@@ -30,6 +30,13 @@
             return DataToDomainMapper.MapUserDataToDomain(dbUser: dbUser);
         }
 
+        public async Task InsertUserAsync(Domain.Entities.User.User user)
+        {
+            User dbUser = DomainToDataMapper.MapUserDomainToData(domainUser: user);
+
+            await _dbContext.Users.AddAsync(entity: dbUser);
+        }
+
         public void UpdateUser(Domain.Entities.User.User user)
         {
             User dbResource = DomainToDataMapper.MapUserDomainToData(domainUser: user);
@@ -40,6 +47,11 @@
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> CheckIfUserExistsAsync(string username)
+        {
+            return await _dbContext.Users.AnyAsync(x => !x.IsDeleted && x.Username == username);
         }
     }
 }

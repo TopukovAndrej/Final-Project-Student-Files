@@ -15,4 +15,6 @@ export class StudentFilesConstants {
     'Welcome, Admin! Have a productive day!';
   public static readonly DeleteConfirmationMessage =
     'Are you sure you want to delete the selected user?';
+  public static readonly CreateConfirmationMessage =
+    'Are you sure that you want to create this user?';
 }

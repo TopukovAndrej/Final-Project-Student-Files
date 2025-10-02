@@ -15,12 +15,15 @@ import {
   IResult,
   IUserDto,
   StudentFilesConstants,
+  StudentFilesErrorMessages,
   StudentFilesFormValidators,
   ToasterMessages,
   UserRolePipe,
 } from '../../../../shared';
 import { AdminService } from '../../services/admin.service';
 import { ToasterService, ToasterType } from '../../../../core';
+import { ICreateUserRequest } from '../..';
+import { catchError, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -34,7 +37,7 @@ import { ToasterService, ToasterType } from '../../../../core';
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent extends BaseComponent implements OnInit {
-  public userManagementForm!: FormGroup;
+  public createUserForm!: FormGroup;
   public users: IUserDto[] = [];
 
   constructor(
@@ -88,8 +91,68 @@ export class AdminDashboardComponent extends BaseComponent implements OnInit {
     }
   }
 
+  public onCreateClicked(): void {
+    if (
+      confirm(StudentFilesConstants.CreateConfirmationMessage) &&
+      this.createUserForm.valid
+    ) {
+      const request: ICreateUserRequest = {
+        username: this.createUserForm.controls['username'].value as string,
+        password: this.createUserForm.controls['password'].value as string,
+        role: this.createUserForm.controls['userRole'].value as string,
+      };
+
+      this.adminService
+        .createUser(request)
+        .pipe(
+          this.untilDestroyed(),
+          switchMap((createUserResult: IResult<string>) => {
+            if (createUserResult.isSuccess && createUserResult.value) {
+              return this.adminService.getUserByUid(createUserResult.value);
+            } else {
+              return of(createUserResult);
+            }
+          }),
+          catchError((error) => {
+            this.toasterService.show(
+              error.error.error?.message || ToasterMessages.COMMON_ERROR,
+              'error'
+            );
+
+            return of(null);
+          })
+        )
+        .subscribe((result: IResult<string> | IResult<IUserDto> | null) => {
+          if (
+            result &&
+            result.isSuccess &&
+            result.value &&
+            typeof result.value !== 'string'
+          ) {
+            this.users.push(result.value);
+
+            this.toasterService.show(
+              ToasterMessages.ADMIN_CREATE_USER_SUCCESSFUL,
+              'success'
+            );
+          } else if (result == null) {
+            return;
+          } else {
+            this.toasterService.show(
+              result.error?.message || ToasterMessages.COMMON_ERROR,
+              'error'
+            );
+          }
+        });
+    }
+  }
+
+  public onCancelClicked(): void {
+    this.createUserForm.reset();
+  }
+
   private initForm(): void {
-    this.userManagementForm = this.formBuilder.group({
+    this.createUserForm = this.formBuilder.group({
       userRole: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.email]],
       password: [

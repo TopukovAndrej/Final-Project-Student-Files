@@ -2,12 +2,12 @@
   <div class="header">
     <h4>Create, Delete or View system users</h4>
   </div>
-  <form class="user-management-form" [formGroup]="userManagementForm">
+  <form class="user-management-form" [formGroup]="createUserForm">
     <div class="form-control">
       <mat-error
         *ngIf="
-          this.userManagementForm.controls['userRole'].touched &&
-          this.userManagementForm.controls['userRole'].invalid
+          this.createUserForm.controls['userRole'].touched &&
+          this.createUserForm.controls['userRole'].invalid
         "
         >Please select an user role</mat-error
       >
@@ -23,8 +23,8 @@
     <div class="form-control">
       <mat-error
         *ngIf="
-          this.userManagementForm.controls['username'].touched &&
-          this.userManagementForm.controls['username'].invalid
+          this.createUserForm.controls['username'].touched &&
+          this.createUserForm.controls['username'].invalid
         "
         >Please enter a valid username (email)</mat-error
       >
@@ -40,13 +40,13 @@
     <div class="form-control">
       <mat-error
         *ngIf="
-          (this.userManagementForm.controls['password'].hasError('required') ||
-            this.userManagementForm.controls['password'].hasError('invalid')) &&
-          this.userManagementForm.controls['password'].invalid &&
-          this.userManagementForm.controls['password'].touched
+          (this.createUserForm.controls['password'].hasError('required') ||
+            this.createUserForm.controls['password'].hasError('invalid')) &&
+          this.createUserForm.controls['password'].invalid &&
+          this.createUserForm.controls['password'].touched
         "
         >{{
-          this.userManagementForm.controls["password"].getError("errorMessage")
+          this.createUserForm.controls["password"].getError("errorMessage")
         }}</mat-error
       >
       <div class="password">
@@ -59,11 +59,14 @@
       </div>
     </div>
     <div class="buttons">
-      <button class="button" type="button">Cancel</button>
+      <button class="button" type="button" (click)="onCancelClicked()">
+        Cancel
+      </button>
       <button
         class="button"
         type="submit"
-        [disabled]="this.userManagementForm.invalid"
+        [disabled]="this.createUserForm.invalid"
+        (click)="onCreateClicked()"
       >
         Create
       </button>

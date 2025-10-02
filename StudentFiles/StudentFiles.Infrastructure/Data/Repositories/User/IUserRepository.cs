@@ -8,6 +8,10 @@
     {
         public Task<Result<Domain.Entities.User.User>> GetUserByUidAsync(Guid userUid);
 
+        public Task InsertUserAsync(Domain.Entities.User.User user);
+
         public void UpdateUser(Domain.Entities.User.User user);
+
+        public Task<bool> CheckIfUserExistsAsync(string username);
     }
 }

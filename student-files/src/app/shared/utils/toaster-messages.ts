@@ -9,4 +9,7 @@ export class ToasterMessages {
 
   public static readonly COMMON_ERROR =
     'Something went wrong. Please try again.';
+
+  public static readonly ADMIN_CREATE_USER_SUCCESSFUL =
+    'User has been created successfully.';
 }
