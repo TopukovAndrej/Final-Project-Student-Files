@@ -17,6 +17,8 @@
             builder.Property(x => x.CourseName).HasColumnName("CourseName").HasColumnType("NVARCHAR").HasMaxLength(30).IsRequired();
 
             builder.Property(x => x.ProfessorFk).HasColumnName("ProfessorFk").HasColumnType("INT").IsRequired();
+
+            builder.HasOne(x => x.Professor).WithMany().HasForeignKey(x => x.ProfessorFk).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
