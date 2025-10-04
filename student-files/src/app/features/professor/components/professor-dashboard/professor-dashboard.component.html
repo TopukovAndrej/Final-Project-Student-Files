@@ -1,0 +1,77 @@
+<div class="professor-dashboard-container">
+  <div class="header">
+    <h4>Submit student grades</h4>
+  </div>
+  <form class="submit-student-grade-form" [formGroup]="submitStudentGradeForm">
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          this.submitStudentGradeForm.controls['student'].touched &&
+          this.submitStudentGradeForm.controls['student'].invalid
+        "
+        >Please select a student</mat-error
+      >
+      <div class="studentDropdown">
+        <label for="student">Select student:</label>
+        <select id="student" formControlName="student">
+          <option value="" disabled selected>--Select a student--</option>
+          <option *ngFor="let student of students" [value]="student.uid">
+            {{ student.username }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          this.submitStudentGradeForm.controls['course'].touched &&
+          this.submitStudentGradeForm.controls['course'].invalid
+        "
+        >Please select a course</mat-error
+      >
+      <div class="courseDropdown">
+        <label for="course">Select course:</label>
+        <select id="course" formControlName="course">
+          <option value="" disabled selected>--Select a course--</option>
+          <option *ngFor="let course of courses" [value]="course.uid">
+            {{`${course.courseId} - ${course.name}`}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-control">
+      <mat-error
+        *ngIf="
+          this.submitStudentGradeForm.controls['grade'].touched &&
+          this.submitStudentGradeForm.controls['grade'].invalid
+        "
+      >
+        Please select a grade
+      </mat-error>
+      <div class="gradeDropdown">
+        <label for="grade">Select grade:</label>
+        <select id="grade" formControlName="grade">
+          <option value="" disabled selected>--Select a grade--</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button" type="button" (click)="onCancelClicked()">
+        Cancel
+      </button>
+      <button
+        class="button"
+        type="submit"
+        [disabled]="this.submitStudentGradeForm.invalid"
+        (click)="onSubmitClicked()"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
