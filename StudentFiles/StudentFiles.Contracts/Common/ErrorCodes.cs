@@ -12,5 +12,6 @@
         public static readonly string UserEmailNotValid = "USER_EMAIL_NOT_VALID";
         public static readonly string UserPasswordNotValid = "USER_PASSWORD_NOT_VALID";
         public static readonly string UserAlreadyExists = "USER_ALREADY_EXISTS";
+        public static readonly string ProfessorNotFound = "PROFESSOR_NOT_FOUND";
     }
 }
