@@ -1,0 +1,81 @@
+@mixin flex-column-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.student-dashboard-container {
+  @include flex-column-centered();
+  min-height: 80vh;
+  justify-content: flex-start;
+  padding: 40px 20px;
+  gap: 40px;
+}
+
+.header {
+  @include flex-column-centered();
+  gap: 25px;
+}
+
+.grade-table {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.grade-table table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.grade-table thead {
+  background-color: #f8f9fa;
+}
+
+.grade-table th {
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #e9ecef;
+  border-right: 1px solid #e0e0e0;
+}
+
+.grade-table th:last-child {
+  border-right: none;
+}
+
+.grade-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e9ecef;
+  border-right: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.grade-table td:last-child {
+  border-right: none;
+}
+
+.grade-table tr:last-child td {
+  border-bottom: none;
+}
+
+
+.grade-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.grade-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.grade-table tr:hover {
+  background-color: #e3f2fd !important;
+  transition: background-color 0.2s;
+}
