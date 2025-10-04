@@ -20,7 +20,7 @@ import {
 } from '../../../../shared';
 import { ToasterService, ToasterType } from '../../../../core';
 import { catchError, of, switchMap } from 'rxjs';
-import { ProfessorServiceService } from '../../services/professor.service';
+import { ProfessorService } from '../../services/professor.service';
 import { ICourseDto } from '../../contracts/ICourseDto';
 
 @Component({
@@ -39,7 +39,7 @@ export class ProfessorDashboardComponent
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly professorService: ProfessorServiceService,
+    private readonly professorService: ProfessorService,
     private readonly toasterService: ToasterService
   ) {
     super();
