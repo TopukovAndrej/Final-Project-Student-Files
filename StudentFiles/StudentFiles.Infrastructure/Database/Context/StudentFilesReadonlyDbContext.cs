@@ -8,11 +8,14 @@
     {
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Course> Courses { get; set; }
+
         public StudentFilesReadonlyDbContext(DbContextOptions<StudentFilesReadonlyDbContext> options) : base(options: options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(configuration: new UserConfiguration());
+            modelBuilder.ApplyConfiguration(configuration: new CourseConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
