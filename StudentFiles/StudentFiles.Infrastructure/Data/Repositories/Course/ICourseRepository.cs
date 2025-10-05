@@ -7,5 +7,7 @@
     public interface ICourseRepository : IRepository<Course>
     {
         public Task<Result<Domain.Entities.Course.Course>> GetCourseByUidAsync(Guid uid);
+
+        public Task<bool> CheckIfProfessorHasCoursesAsync(int professorId);
     }
 }

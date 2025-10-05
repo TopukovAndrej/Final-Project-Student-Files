@@ -17,10 +17,12 @@
         public static readonly string StudentNotFound = "STUDENT_NOT_FOUND";
         public static readonly string StudentAlreadyGraduated = "STUDENT_ALREADY_GRADUATED";
         public static readonly string StudentAlreadyGradedForCourse = "STUDENT_ALREADY_GRADED_FOR_COURSE";
+        public static readonly string AdminDeleteForbidden = "ADMIN_DELETE_FORBIDDEN";
 
         // Courses
         public static readonly string CourseNotFound = "COURSE_NOT_FOUND";
         public static readonly string ProfessorCourseGradingNotValid = "PROFESSOR_COURSE_GRADING_NOT_VALID";
+        public static readonly string ProfessorHasCourses = "PROFESSOR_HAS_COURSES";
 
         // Grades
         public static readonly string GradeNotValid = "GRADE_NOT_VALID";

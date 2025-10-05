@@ -29,6 +29,11 @@
             return DataToDomainMapper.MapCourseDataToDomain(dbCourse: dbCourse);
         }
 
+        public async Task<bool> CheckIfProfessorHasCoursesAsync(int professorId)
+        {
+            return await _dbContext.Courses.AnyAsync(predicate: x => !x.IsDeleted && x.ProfessorFk == professorId);
+        }
+
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();

@@ -18,8 +18,8 @@
 
         public async Task<Result<Domain.Entities.User.User>> GetUserByUidAsync(Guid userUid)
         {
-            User? dbUser = await _dbContext.Users.SingleOrDefaultAsync(predicate: x => !x.IsDeleted
-                                                                                    && x.Uid == userUid);
+            User? dbUser = await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(predicate: x => !x.IsDeleted
+                                                                                                   && x.Uid == userUid);
 
             if (dbUser == null)
             {
@@ -39,9 +39,9 @@
 
         public void UpdateUser(Domain.Entities.User.User user)
         {
-            User dbResource = DomainToDataMapper.MapUserDomainToData(domainUser: user);
+            User dbUser = DomainToDataMapper.MapUserDomainToData(domainUser: user);
 
-            _dbContext.Users.Update(dbResource);
+            _dbContext.Users.Update(dbUser);
         }
 
         public async Task SaveChangesAsync()

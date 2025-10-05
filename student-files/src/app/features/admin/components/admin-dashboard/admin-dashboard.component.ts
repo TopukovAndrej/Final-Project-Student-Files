@@ -70,18 +70,24 @@ export class AdminDashboardComponent extends BaseComponent implements OnInit {
     if (confirm(StudentFilesConstants.DeleteConfirmationMessage)) {
       this.adminService
         .deleteUser(userUid)
-        .pipe(this.untilDestroyed())
-        .subscribe((result: IBaseResult) => {
-          if (result.isSuccess) {
+        .pipe(
+          this.untilDestroyed(),
+          catchError((response) => {
+            this.toasterService.show(
+              response.error?.error?.message ??
+                ToasterMessages.ADMIN_DELETE_USER_FAILED,
+              ToasterType.Error
+            );
+
+            return of(null);
+          })
+        )
+        .subscribe((result: IBaseResult | null) => {
+          if (result && result.isSuccess) {
             this.users = this.users.filter((x) => x.uid !== userUid);
             this.toasterService.show(
               ToasterMessages.ADMIN_DELETE_USER_SUCCESSFUL,
               ToasterType.Success
-            );
-          } else {
-            this.toasterService.show(
-              ToasterMessages.ADMIN_DELETE_USER_FAILED,
-              ToasterType.Error
             );
           }
         });
