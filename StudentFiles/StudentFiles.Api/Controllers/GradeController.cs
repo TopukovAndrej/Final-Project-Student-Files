@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using StudentFiles.Api.Common;
     using StudentFiles.Application.Commands.Grade;
+    using StudentFiles.Application.Queries.Grade;
     using StudentFiles.Contracts.Common;
     using StudentFiles.Contracts.Models.Result;
     using StudentFiles.Contracts.Requests.Grade;
@@ -26,6 +27,16 @@
         public async Task<IActionResult> SubmitGradeAsync([FromBody] SubmitGradeRequest request)
         {
             Result result = await _mediator.Send(request: new SubmitGradeCommand(request: request));
+
+            return StatusCode(statusCode: ResultTypeMapper.MapToHttpStatusCode(resultType: result.Type), value: result);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = UserRole.Student)]
+        [Route("student/{studentUid:guid}")]
+        public async Task<IActionResult> GetStudentGradesAsync([FromRoute] Guid studentUid)
+        {
+            Result result = await _mediator.Send(request: new GetStudentGradesQuery(studentUid: studentUid));
 
             return StatusCode(statusCode: ResultTypeMapper.MapToHttpStatusCode(resultType: result.Type), value: result);
         }

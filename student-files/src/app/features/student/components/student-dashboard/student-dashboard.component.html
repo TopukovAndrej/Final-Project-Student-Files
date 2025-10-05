@@ -14,12 +14,18 @@
           <th>Graded by</th>
         </tr>
       </thead>
-      <tr>
-        <td>CS 101</td>
-        <td>Course 1</td>
-        <td>6</td>
-        <td>03.10.2025</td>
-        <td>Me, Myself and I</td>
+      <tr *ngFor="let grade of studentGrades">
+        <td>{{ grade.courseId }}</td>
+        <td>{{ grade.courseName }}</td>
+        <td>{{ grade.grade }}</td>
+        <td>{{ grade.assignedAt | dateFormat }}</td>
+        <td>
+          {{
+            grade.assignedBy.length === 0
+              ? "(no data)"
+              : (grade.assignedBy | userName : "Professor")
+          }}
+        </td>
       </tr>
     </table>
   </div>
