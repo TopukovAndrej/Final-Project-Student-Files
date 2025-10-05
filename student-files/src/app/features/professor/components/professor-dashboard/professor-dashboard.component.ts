@@ -12,12 +12,8 @@ import {
   IBaseResult,
   IResult,
   ISimpleUserDto,
-  IUserDto,
-  StudentFilesConstants,
-  StudentFilesFormValidators,
   ToasterMessages,
   UserRole,
-  UserRolePipe,
 } from '../../../../shared';
 import {
   AuthService,
@@ -29,7 +25,6 @@ import { catchError, of, switchMap } from 'rxjs';
 import { ProfessorService } from '../../services/professor.service';
 import { ICourseDto } from '../../contracts/ICourseDto';
 import { ISubmitGradeRequest } from '../../contracts/ISubmitGradeRequest';
-import { ResolveStart } from '@angular/router';
 
 @Component({
   selector: 'app-professor-dashboard',

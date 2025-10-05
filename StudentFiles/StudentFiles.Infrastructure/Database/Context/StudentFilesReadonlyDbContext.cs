@@ -10,6 +10,8 @@
 
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Grade> Grades { get; set; }
+
         public StudentFilesReadonlyDbContext(DbContextOptions<StudentFilesReadonlyDbContext> options) : base(options: options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
