@@ -1,7 +1,7 @@
 ﻿SET IDENTITY_INSERT [dbo].[User] ON
 INSERT INTO [dbo].[User] ([Id], [Uid], [IsDeleted], [Username], [Password], [Role]) VALUES (1, N'0d8326a6-c3af-4954-8f77-85f6f3036f28', 0, N'admin@students.edu', N'$2b$12$2glodVSdpzLpF5usOrf6v.8CQubAGJwZHXxSrcfAd5xEe6EAqZF4y', N'ADMIN'),
 																						   (2, N'cefe5b0e-abd5-4bba-b6c6-97d451bda394', 0, N'petar.professor@students.edu', N'$2b$12$Dtah3COJM89Hi/gBvE2xw.H0Q3qyw1YZZdQXgkTqWVD2PqZUy9som', N'PROFESSOR'),
-																						   (3, N'c60b0218-9b92-4eb2-ab53-ecf2b3fe9674', 0, N'trajko.professor@students.edu', N'$2b$12$M.CzDFl8G5uc.bKgCYGmN.LqKFRqFQYFgyTiTXGorYvlWYE3EAxli', N'STUDENT'),
+																						   (3, N'c60b0218-9b92-4eb2-ab53-ecf2b3fe9674', 0, N'trajko.professor@students.edu', N'$2b$12$M.CzDFl8G5uc.bKgCYGmN.LqKFRqFQYFgyTiTXGorYvlWYE3EAxli', N'PROFESSOR'),
 																						   (4, N'3da66511-6174-42d6-ba1b-968c056df12f', 0, N'stefanija.professor@students.edu', N'$2b$12$2GQMsJD3g.ceaOzRAgKV8e9H/yuiTIKWYB1/Lw2vv/nkBjHl4JlBq', N'PROFESSOR'),
 																						   (5, N'84a1ca29-27bd-4042-baae-415a6d94693e', 0, N'teodor.professor@students.edu', N'$2b$12$LN2tSjSWB8LMA0m3Bdult.uCXtudtL4HTrPWhJvImOqE90hlwxzGW', N'PROFESSOR'),
 																						   (6, N'1461bf89-f2ef-446b-bf14-6a8fc5ee3f19', 0, N'mila.professor@students.edu', N'$2b$12$EMirvvDTMBXdjKrF7GfM/e2UPXEoSmCOKW.cb.3JvgUgYToQUjHgO', N'PROFESSOR'),
