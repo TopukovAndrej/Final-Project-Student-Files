@@ -1,7 +1,7 @@
-import { inject } from "@angular/core";
-import { CanActivateFn, Router } from "@angular/router";
-import { AuthService } from "..";
-import { UserRole } from "../../shared";
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '..';
+import { UserRole } from '../../shared';
 
 export const studentRoleGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
@@ -13,6 +13,5 @@ export const studentRoleGuard: CanActivateFn = () => {
     return true;
   }
 
-  router.navigate(['/home']);
-  return false;
+  return router.createUrlTree(['/home']);
 };

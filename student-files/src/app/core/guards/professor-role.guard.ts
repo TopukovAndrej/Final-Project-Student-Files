@@ -12,6 +12,5 @@ export const professorRoleGuard: CanActivateFn = () => {
     return true;
   }
 
-  router.navigate(['/home']);
-  return false;
+  return router.createUrlTree(['/home']);
 };
