@@ -28,7 +28,7 @@
 
         public async Task<Result<IReadOnlyList<CourseDto>>> Handle(GetProfessorCoursesQuery query, CancellationToken cancellationToken)
         {
-            int professorId = await _dbContext.Users.Where(predicate: x => x.Uid == query.ProfessorUid)
+            int professorId = await _dbContext.Users.Where(predicate: x => !x.IsDeleted && x.Uid == query.ProfessorUid)
                                                     .Select(selector: x => x.Id)
                                                     .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
