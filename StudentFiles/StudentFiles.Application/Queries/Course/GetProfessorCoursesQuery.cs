@@ -1,4 +1,4 @@
-﻿namespace StudentFiles.Application.Queries.User
+﻿namespace StudentFiles.Application.Queries.Course
 {
     using MediatR;
     using Microsoft.EntityFrameworkCore;

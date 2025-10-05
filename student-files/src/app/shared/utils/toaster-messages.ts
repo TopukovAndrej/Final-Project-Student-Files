@@ -12,4 +12,10 @@ export class ToasterMessages {
 
   public static readonly ADMIN_CREATE_USER_SUCCESSFUL =
     'User has been created successfully.';
+
+  public static readonly PROFESSOR_NO_COURSES_FOUND =
+    'You currently have no courses to grade. Please contact support if needed.';
+
+  public static readonly PROFESSOR_SUBMIT_GRADE_SUCCESSFUL =
+    'The grade has been submitted successfully.';
 }

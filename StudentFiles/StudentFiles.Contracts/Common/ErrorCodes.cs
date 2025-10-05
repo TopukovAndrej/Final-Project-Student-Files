@@ -13,5 +13,16 @@
         public static readonly string UserPasswordNotValid = "USER_PASSWORD_NOT_VALID";
         public static readonly string UserAlreadyExists = "USER_ALREADY_EXISTS";
         public static readonly string ProfessorNotFound = "PROFESSOR_NOT_FOUND";
+        public static readonly string StudentsNotFound = "STUDENTS_NOT_FOUND";
+        public static readonly string StudentNotFound = "STUDENT_NOT_FOUND";
+        public static readonly string StudentAlreadyGraduated = "STUDENT_ALREADY_GRADUATED";
+        public static readonly string StudentAlreadyGradedForCourse = "STUDENT_ALREADY_GRADED_FOR_COURSE";
+
+        // Courses
+        public static readonly string CourseNotFound = "COURSE_NOT_FOUND";
+        public static readonly string ProfessorCourseGradingNotValid = "PROFESSOR_COURSE_GRADING_NOT_VALID";
+
+        // Grades
+        public static readonly string GradeNotValid = "GRADE_NOT_VALID";
     }
 }

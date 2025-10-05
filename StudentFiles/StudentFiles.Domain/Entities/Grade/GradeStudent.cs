@@ -1,14 +1,12 @@
-﻿namespace StudentFiles.Domain.Entities.Course
+﻿namespace StudentFiles.Domain.Entities.Grade
 {
-    using System;
-
-    public class CourseProfessor
+    public class GradeStudent
     {
         public int Id { get; private set; }
 
         public string Username { get; private set; }
 
-        public CourseProfessor(int id, string username)
+        public GradeStudent(int id, string username)
         {
             Id = id;
             Username = username;

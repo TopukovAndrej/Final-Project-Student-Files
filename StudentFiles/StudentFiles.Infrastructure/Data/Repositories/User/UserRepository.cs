@@ -18,8 +18,8 @@
 
         public async Task<Result<Domain.Entities.User.User>> GetUserByUidAsync(Guid userUid)
         {
-            User? dbUser = await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(predicate: x => !x.IsDeleted
-                                                                                                   && x.Uid == userUid);
+            User? dbUser = await _dbContext.Users.SingleOrDefaultAsync(predicate: x => !x.IsDeleted
+                                                                                    && x.Uid == userUid);
 
             if (dbUser == null)
             {
@@ -49,7 +49,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> CheckIfUserExistsAsync(string username)
+        public async Task<bool> CheckIfUserExistsByUsernameAsync(string username)
         {
             return await _dbContext.Users.AnyAsync(x => !x.IsDeleted && x.Username == username);
         }

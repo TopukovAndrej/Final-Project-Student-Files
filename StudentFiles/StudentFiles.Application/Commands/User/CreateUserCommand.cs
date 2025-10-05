@@ -41,7 +41,7 @@
                 return Result<Guid>.Failed(error: new Error(Code: ErrorCodes.UserPasswordNotValid, Message: ErrorMessage.UserPasswordNotValid), resultType: ResultType.BadRequest);
             }
 
-            bool userAlreadyExists = await _userRepository.CheckIfUserExistsAsync(username:  command.Request.Username);
+            bool userAlreadyExists = await _userRepository.CheckIfUserExistsByUsernameAsync(username:  command.Request.Username);
 
             if (userAlreadyExists)
             {

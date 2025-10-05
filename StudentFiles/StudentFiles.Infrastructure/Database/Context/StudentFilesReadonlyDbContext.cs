@@ -16,6 +16,7 @@
         {
             modelBuilder.ApplyConfiguration(configuration: new UserConfiguration());
             modelBuilder.ApplyConfiguration(configuration: new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(configuration: new GradeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

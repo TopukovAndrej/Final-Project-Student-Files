@@ -8,11 +8,17 @@
     {
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Grade> Grades { get; set; }
+
         public StudentFilesDbContext(DbContextOptions<StudentFilesDbContext> options) : base(options: options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(configuration: new UserConfiguration());
+            modelBuilder.ApplyConfiguration(configuration: new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(configuration: new GradeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

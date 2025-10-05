@@ -18,7 +18,7 @@
 
             builder.Property(x => x.ProfessorFk).HasColumnName("ProfessorFk").HasColumnType("INT").IsRequired();
 
-            builder.HasOne(x => x.Professor).WithMany().HasForeignKey(x => x.ProfessorFk).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Professor).WithMany().HasForeignKey(x => x.ProfessorFk);
         }
     }
 }

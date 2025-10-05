@@ -34,7 +34,7 @@
         <select id="course" formControlName="course">
           <option value="" disabled selected>--Select a course--</option>
           <option *ngFor="let course of courses" [value]="course.uid">
-            {{`${course.courseId} - ${course.name}`}}
+            {{`${course.courseId} - ${course.courseName}`}}
           </option>
         </select>
       </div>

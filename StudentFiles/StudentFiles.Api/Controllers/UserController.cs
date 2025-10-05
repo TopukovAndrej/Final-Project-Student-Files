@@ -54,5 +54,15 @@
 
             return StatusCode(statusCode: ResultTypeMapper.MapToHttpStatusCode(resultType: result.Type), value: result);
         }
+
+        [HttpGet]
+        [Authorize(Roles = UserRole.Professor)]
+        [Route("all-students")]
+        public async Task<IActionResult> GetAllStudentsAsync()
+        {
+            Result<IReadOnlyList<SimpleUserDto>> result = await mediator.Send(request: new GetAllStudentsQuery());
+
+            return StatusCode(statusCode: ResultTypeMapper.MapToHttpStatusCode(resultType: result.Type), value: result);
+        }
     }
 }

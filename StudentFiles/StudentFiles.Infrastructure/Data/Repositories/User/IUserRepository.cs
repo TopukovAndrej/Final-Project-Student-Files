@@ -12,6 +12,6 @@
 
         public void UpdateUser(Domain.Entities.User.User user);
 
-        public Task<bool> CheckIfUserExistsAsync(string username);
+        public Task<bool> CheckIfUserExistsByUsernameAsync(string username);
     }
 }
