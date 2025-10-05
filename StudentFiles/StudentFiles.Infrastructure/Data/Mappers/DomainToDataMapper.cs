@@ -13,5 +13,17 @@
                             hashedPassword: domainUser.HashedPassword,
                             role: domainUser.Role.Code);
         }
+
+        public static Grade MapGradeDomainToData(Domain.Entities.Grade.Grade domainGrade)
+        {
+            return new Grade(id: domainGrade.Id,
+                             uid: domainGrade.Uid,
+                             isDeleted: domainGrade.IsDeleted,
+                             value: domainGrade.Value,
+                             dateAssigned: domainGrade.DateAssigned,
+                             studentFk: domainGrade.Student.Id,
+                             professorFk: domainGrade.Professor.Id,
+                             courseFk: domainGrade.Course.Id);
+        }
     }
 }

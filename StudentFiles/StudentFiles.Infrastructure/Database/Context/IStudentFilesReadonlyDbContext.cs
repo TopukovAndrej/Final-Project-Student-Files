@@ -6,5 +6,9 @@
     public interface IStudentFilesReadonlyDbContext
     {
         public DbSet<User> Users { get; }
+
+        public DbSet<Course> Courses { get; }
+
+        public DbSet<Grade> Grades { get; }
     }
 }

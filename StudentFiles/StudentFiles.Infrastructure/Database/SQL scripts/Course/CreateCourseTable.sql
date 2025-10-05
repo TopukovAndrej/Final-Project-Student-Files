@@ -2,8 +2,7 @@
 	Id              INT              NOT NULL    PRIMARY KEY IDENTITY(1, 1),
 	Uid             UNIQUEIDENTIFIER NOT NULL,
 	IsDeleted       BIT              NOT NULL    DEFAULT 0,
-	Value           INT              NOT NULL,
 	CourseId        NVARCHAR(7)      NOT NULL,
-	CourseName      NVARCHAR(30)     NOT NULL,
+	CourseName      NVARCHAR(100)     NOT NULL,
 	ProfessorFk     INT              NOT NULL    FOREIGN KEY REFERENCES [User]([Id])
 )

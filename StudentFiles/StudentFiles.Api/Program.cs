@@ -7,6 +7,8 @@ namespace StudentFiles.Api
     using StudentFiles.Api.Services;
     using StudentFiles.Application;
     using StudentFiles.Contracts;
+    using StudentFiles.Infrastructure.Data.Repositories.Course;
+    using StudentFiles.Infrastructure.Data.Repositories.Grade;
     using StudentFiles.Infrastructure.Data.Repositories.User;
     using StudentFiles.Infrastructure.Database.Context;
     using System.Text;
@@ -37,6 +39,8 @@ namespace StudentFiles.Api
             });
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<IGradeRepository, GradeRepository>();
 
             builder.Services.AddCors(options =>
             {

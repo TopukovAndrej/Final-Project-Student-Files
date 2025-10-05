@@ -16,5 +16,18 @@
 
             return domainUserResult;
         }
+
+        public static Result<Domain.Entities.Course.Course> MapCourseDataToDomain(Course dbCourse)
+        {
+            Result<Domain.Entities.Course.Course> domainCourseResult = Domain.Entities.Course.Course.Create(id: dbCourse.Id,
+                                                                                                            uid: dbCourse.Uid,
+                                                                                                            isDeleted: dbCourse.IsDeleted,
+                                                                                                            courseId: dbCourse.CourseId,
+                                                                                                            courseName: dbCourse.CourseName,
+                                                                                                            professorId: dbCourse.Professor.Id,
+                                                                                                            professorUsername: dbCourse.Professor.Username);
+
+            return domainCourseResult;
+        }
     }
 }
