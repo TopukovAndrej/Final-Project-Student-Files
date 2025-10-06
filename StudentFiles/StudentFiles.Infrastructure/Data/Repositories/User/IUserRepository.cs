@@ -6,6 +6,8 @@
 
     public interface IUserRepository : IRepository<User>
     {
+        public Task<Result<Domain.Entities.User.User>> GetUserByUidAndRoleAsync(Guid userUid, string userRole);
+
         public Task<Result<Domain.Entities.User.User>> GetUserByUidAsync(Guid userUid);
 
         public Task InsertUserAsync(Domain.Entities.User.User user);
