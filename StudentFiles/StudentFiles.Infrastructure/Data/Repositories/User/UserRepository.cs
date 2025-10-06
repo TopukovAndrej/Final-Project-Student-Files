@@ -16,6 +16,21 @@
             _dbContext = dbContext;
         }
 
+        public async Task<Result<Domain.Entities.User.User>> GetUserByUidAndRoleAsync(Guid userUid, string userRole)
+        {
+            User? dbUser = await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(predicate: x => !x.IsDeleted
+                                                                                                   && x.Uid == userUid
+                                                                                                   && x.Role == userRole);
+
+            if (dbUser == null)
+            {
+                return Result<Domain.Entities.User.User>.Failed(error: new Error(Code: ErrorCodes.UserNotFound, Message: ErrorMessage.UserNotFound),
+                                                                resultType: ResultType.NotFound);
+            }
+
+            return DataToDomainMapper.MapUserDataToDomain(dbUser: dbUser);
+        }
+
         public async Task<Result<Domain.Entities.User.User>> GetUserByUidAsync(Guid userUid)
         {
             User? dbUser = await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(predicate: x => !x.IsDeleted

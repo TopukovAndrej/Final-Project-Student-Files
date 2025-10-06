@@ -48,7 +48,7 @@
                 return Result.Failed(error: courseResult.Error, resultType: courseResult.Type);
             }
 
-            Result<User> professorResult = await _userRepository.GetUserByUidAsync(userUid: command.Request.ProfessorUid);
+            Result<User> professorResult = await _userRepository.GetUserByUidAndRoleAsync(userUid: command.Request.ProfessorUid, userRole: Domain.Entities.User.UserRole.Professor.Code);
 
             if (professorResult.IsFailure)
             {
@@ -60,7 +60,7 @@
                 return Result.Failed(error: new Error(Code: ErrorCodes.ProfessorCourseGradingNotValid, Message: ErrorMessage.ProfessorCourseGradingNotValid), resultType: ResultType.Invalid);
             }
 
-            Result<User> studentResult = await _userRepository.GetUserByUidAsync(userUid: command.Request.StudentUid);
+            Result<User> studentResult = await _userRepository.GetUserByUidAndRoleAsync(userUid: command.Request.StudentUid, userRole: Domain.Entities.User.UserRole.Student.Code);
 
             if (studentResult.IsFailure)
             {
