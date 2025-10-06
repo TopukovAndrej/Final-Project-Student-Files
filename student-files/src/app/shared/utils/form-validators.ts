@@ -5,7 +5,11 @@ import { StudentFilesErrorMessages } from './error-messages';
 export class StudentFilesFormValidators {
   public static signInPasswordFormControlValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const password = control.value as string;
+      if (control.value == null) {
+        return null;
+      }
+
+      const password: string = control.value as string;
 
       if (password.length < StudentFilesConstants.PasswordMinLength) {
         return {
