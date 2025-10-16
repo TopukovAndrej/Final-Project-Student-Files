@@ -6,7 +6,6 @@ namespace StudentFiles.Api
     using StudentFiles.Api.Configuration;
     using StudentFiles.Api.Services;
     using StudentFiles.Application;
-    using StudentFiles.Contracts;
     using StudentFiles.Infrastructure.Data.Repositories.Course;
     using StudentFiles.Infrastructure.Data.Repositories.Grade;
     using StudentFiles.Infrastructure.Data.Repositories.User;
@@ -35,7 +34,7 @@ namespace StudentFiles.Api
             builder.Services.AddMediatR(configuration: cfg =>
             {
                 cfg.RegisterGenericHandlers = true;
-                cfg.RegisterServicesFromAssemblies(typeof(ContractsAssemblyMarker).Assembly, typeof(ApplicationAssemblyMarker).Assembly);
+                cfg.RegisterServicesFromAssemblies(typeof(ApplicationAssemblyMarker).Assembly);
             });
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
