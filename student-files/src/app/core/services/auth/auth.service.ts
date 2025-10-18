@@ -63,8 +63,6 @@ export class AuthService {
   }
 
   public signOut(): void {
-    localStorage.removeItem(this.tokenKey);
-
     this.clearAuthState();
 
     this.router.navigate(['/home']);
