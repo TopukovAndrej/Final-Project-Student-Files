@@ -21,7 +21,7 @@ import {
   ToasterService,
   ToasterType,
 } from '../../../../core';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, of, switchMap, take } from 'rxjs';
 import { ProfessorService } from '../../services/professor.service';
 import { ICourseDto } from '../../contracts/ICourseDto';
 import { ISubmitGradeRequest } from '../../contracts/ISubmitGradeRequest';
@@ -93,6 +93,7 @@ export class ProfessorDashboardComponent
 
     this.authService.currentUser$
       .pipe(
+        take(1),
         this.untilDestroyed(),
         switchMap((currentUser: IUserDetailsFromToken | null) => {
           if (currentUser && currentUser.userRole === UserRole.Professor) {

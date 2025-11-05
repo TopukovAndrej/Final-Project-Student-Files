@@ -13,7 +13,7 @@ import {
   ToasterService,
   ToasterType,
 } from '../../../../core';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, of, switchMap, take } from 'rxjs';
 import { StudentService } from '../../services/student.service';
 import { DateFormatPipe } from '../../../../shared';
 import { UserNamePipe } from '../../../../shared';
@@ -38,6 +38,7 @@ export class StudentDashboardComponent extends BaseComponent implements OnInit {
   public ngOnInit(): void {
     this.authService.currentUser$
       .pipe(
+        take(1),
         this.untilDestroyed(),
         switchMap((currentUser: IUserDetailsFromToken | null) => {
           if (currentUser && currentUser.userRole === UserRole.Student) {
